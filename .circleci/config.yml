@@ -1,0 +1,44 @@
+version: 2.1
+
+references:
+  attach_workspace: &attach_workspace
+    attach_workspace:
+      at: /tmp
+
+  install_subversion: &install_subversion
+    run:
+      name: Install subversion
+      command: |
+        sudo apt-get update
+        sudo apt-get install subversion
+
+jobs:
+  deploy-master:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - *attach_workspace
+      - *install_subversion
+      - run:
+          name: Deploy assets to WordPress plugin directory
+          command: |
+            echo "export GIT_COMMIT_MESSAGE=\"$(git log --format=%B -n 1 $CIRCLE_SHA1)\"" >> $BASH_ENV
+            source $BASH_ENV
+            .circleci/deploy-assets.sh
+      - run:
+          name: Deploy new version to WordPress plugin directory
+          command: .circleci/deploy-plugin.sh
+
+workflows:
+  version: 2
+  release:
+    jobs:
+      - deploy-master:
+          context:
+            - ci
+            - wordpress-svn
+          filters:
+            branches:
+              only:
+                - master
