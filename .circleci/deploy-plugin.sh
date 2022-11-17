@@ -27,13 +27,13 @@ SVN_TAG=$(grep -oP '(?<=Stable tag: )([0-9]+\.[0-9]+(\.[0-9])*)' ./trunk/readme.
 echo "Get tag from readme.txt: $SVN_TAG"
 
 # Check if the latest SVN tag exists already
-TAG=$(svn ls "https://plugins.svn.wordpress.org/email-marketing-and-crm-for-elementor-by-customerly/tags/$SVN_TAG")
-error=$?
-if [ $error == 0 ]; then
-    # Tag exists, don't deploy
-    echo "Latest tag ($SVN_TAG) already exists on the WordPress directory. No deployment needed!"
-    exit 0
-fi
+#TAG=$(svn ls "https://plugins.svn.wordpress.org/email-marketing-and-crm-for-elementor-by-customerly/tags/$SVN_TAG")
+#error=$?
+#if [ $error == 0 ]; then
+#    # Tag exists, don't deploy
+#    echo "Latest tag ($SVN_TAG) already exists on the WordPress directory. No deployment needed!"
+#    exit 0
+#fi
 
 # Checkout the SVN repo
 svn co -q "http://plugins.svn.wordpress.org/email-marketing-and-crm-for-elementor-by-customerly" $PLUGIN_SVN_PATH

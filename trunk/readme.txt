@@ -19,7 +19,6 @@ Customerly is the first platform with all the tools and integrations you need fo
 
 Use Customerly to:
 
-* 💬 Live chat with your website visitors in real-time using live chat, automated live chat triggers.
 * ✉️ Engage and capture more leads automatically with live chat triggers and profiling questions.
 * 📢 Nurture leads by sending automated email marketing with powerful workflows.
 * 👥 Create lists based on your rules and reuse them to send tailored messages.
